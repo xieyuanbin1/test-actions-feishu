@@ -33,7 +33,7 @@ const content = {
           { "tag": "text", "text": `${repository} ${event.release.name} 版本已发布。`, "style": "" }
         ],
         [
-          { "tag": "text", "text": '提交人：\n' },
+          { "tag": "text", "text": '提交人：' },
           { "tag": "text", "text": actor }
         ],
         [
