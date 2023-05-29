@@ -10,7 +10,7 @@ jobs:
   send-message-to-feishu:
     runs-on: ubuntu-latest
     steps:
-      - name: "CURL send message"
+      - name: "CURL Send Message"
         run: |
           curl -X POST -H "Content-Type: application/json" \
           -d '{"msg_type":"text","content":{"text":"request example"}}' \
