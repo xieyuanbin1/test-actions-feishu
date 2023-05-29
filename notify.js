@@ -1,8 +1,8 @@
 const axios = require('axios')
 const crypto = require("crypto")
 const timestamp = ~~((new Date().getTime()) / 1000)
-console.log('>> time:', timestamp)
-console.log('LOG::', process.env.GITHUB)
+// console.log('>> time:', timestamp)
+// console.log('LOG::', process.env.GITHUB)
 
 let text = ''
 if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release') {
@@ -117,7 +117,9 @@ if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release
     "sign": up.digest('base64'),
     "msg_type": "interactive",
     "card": card
-  }).then(() => {
-    console.info('>> send ok <<')
+  }).then((data) => {
+    console.info('>> send ok <<', data)
+  }).catch(err => {
+    console.error(">> error:", err);
   })
 }
