@@ -18,7 +18,7 @@ const webhookUrl = process.env.FEISHU_WEBHOOK
 const hmac = crypto.createHmac('sha256', timestamp + '\n' + secretKey)
 const up = hmac.update("")
 
-function sendText () {
+function sendText() {
   axios.post(webhookUrl, {
     "timestamp": timestamp,
     "sign": up.digest('base64'),
@@ -41,6 +41,7 @@ const card = {
   config: {
     enable_forward: false, // 是否允许卡片被转发 默认 true
     update_multi: true, // 是否为共享卡片 是/更新卡片的内容对所有收到这张卡片的人员可见 否/仅操作用户可见卡片的更新内容
+    wide_screen_mode: true
   },
   // 用于配置卡片标题内容
   header: {
@@ -65,7 +66,7 @@ const card = {
     }
   ]
 }
-function sendCard () {
+function sendCard() {
   const ins = axios.post(webhookUrl, {
     "timestamp": timestamp,
     "sign": up.digest('base64'),
@@ -74,4 +75,49 @@ function sendCard () {
   })
 }
 // sendCard()
-sendText()
+// sendText()
+
+if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release') {
+  const { repository, actor, event } = JSON.parse(process.env.GITHUB)
+  text += `${repository} ${event.release.name} 版本已发布 \n`
+  text += `提交人: ${actor} \n`
+  text += `内容: ${event.release.body}`
+
+  // 卡片消息结构
+  const card = {
+    // 用于描述卡片的功能属性
+    config: {
+      enable_forward: false, // 是否允许卡片被转发 默认 true
+      update_multi: true, // 是否为共享卡片 是/更新卡片的内容对所有收到这张卡片的人员可见 否/仅操作用户可见卡片的更新内容
+      wide_screen_mode: true
+    },
+    // 用于配置卡片标题内容
+    header: {
+      // 配置卡片标题内容
+      title: {
+        tag: 'plain_text', // 固定的 plain_text
+        content: `${repository} ${event.release.name} 版本已发布` // 卡片标题文案内容
+      },
+      template: 'blue' // 控制标题背景颜色 blue/wathet/turquoise/green/yellow/orange/red/carmine/violet/purple/indigo/grey
+    },
+    // 用于定义卡片正文内容 i18n_elements 用于国际化
+    elements: [
+      {
+        "tag": "at"
+      },
+      {
+        "tag": "markdown",
+        "content": `${event.release.body}`
+      }
+    ]
+  }
+
+  axios.post(webhookUrl, {
+    "timestamp": timestamp,
+    "sign": up.digest('base64'),
+    "msg_type": "interactive",
+    "card": card
+  }).then(() => {
+    console.info('>> send ok <<')
+  })
+}
