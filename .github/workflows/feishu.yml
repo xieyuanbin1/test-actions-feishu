@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Log"
-        run: echo ${{ github.event_name }}
+        run: echo ${{ github.event }}
 
       - uses: actions/checkout@v3
 
