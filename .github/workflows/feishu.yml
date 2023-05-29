@@ -17,7 +17,7 @@ jobs:
         run: npm install
 
       - name: 'Run node'
-        run: node index.js
+        run: node notify.js
 
         env:
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
