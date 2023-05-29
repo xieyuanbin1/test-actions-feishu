@@ -27,5 +27,6 @@ jobs:
         run: node notify.js
 
         env:
+          GITHUB: ${{ toJSON(github) }}
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           FEISHU_SIGN: ${{ secrets.FEISHU_SIGN }}
