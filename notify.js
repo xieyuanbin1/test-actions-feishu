@@ -83,7 +83,7 @@ if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release
 
   // 卡片消息结构
   const content = {
-    "zh-cn": {
+    "zh_cn": {
       "title": `${repository} ${event.release.name} 版本已发布`,
       "content": [
         [
