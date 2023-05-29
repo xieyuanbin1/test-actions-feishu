@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: "Log"
         env:
-          GITHUB: ${{ toJSON(github) }}
-        run: echo "$GITHUB"
+          CC: ${{ toJSON(github) }}
+        run: echo "$CC"
 
       - uses: actions/checkout@v3
 
