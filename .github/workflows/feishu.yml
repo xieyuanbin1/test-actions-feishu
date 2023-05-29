@@ -10,6 +10,9 @@ jobs:
   send-message-to-feishu:
     runs-on: ubuntu-latest
     steps:
+      - name: "Log"
+        run: echo ${{ github.event_name }}
+
       - uses: actions/checkout@v3
 
       - name: 'Install node'
