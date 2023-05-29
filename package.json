@@ -1,0 +1,23 @@
+{
+  "name": "test-actions-feishu",
+  "version": "1.0.0",
+  "description": "github actions feishu",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xybin1990/test-actions-feishu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xybin1990/test-actions-feishu/issues"
+  },
+  "homepage": "https://github.com/xybin1990/test-actions-feishu#readme",
+  "dependencies": {
+    "axios": "^1.4.0"
+  }
+}
