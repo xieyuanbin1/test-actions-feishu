@@ -2,6 +2,7 @@ const axios = require('axios')
 const crypto = require("crypto")
 const timestamp = ~~((new Date().getTime()) / 1000)
 console.log('>> time:', timestamp)
+console.log('LOG::', process.env.GITHUB)
 
 const secretKey = process.env.FEISHU_SIGN
 const webhookUrl = process.env.FEISHU_WEBHOOK
