@@ -87,7 +87,7 @@ if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release
       "title": `${repository} ${event.release.name} 版本已发布`,
       "content": [
         [
-          { "tag": "at", "user_name": "all" }
+          { "tag": "at", "user_id": "all" }
         ],
         [
           { "tag": "a", "href": event.release.html_url, "text": "查看",}
