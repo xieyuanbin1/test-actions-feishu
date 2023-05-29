@@ -4,6 +4,14 @@ const timestamp = ~~((new Date().getTime()) / 1000)
 console.log('>> time:', timestamp)
 console.log('LOG::', process.env.GITHUB)
 
+let text = ''
+if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release') {
+  const { repository, actor, event } = JSON.parse(process.env.GITHUB)
+  text += `${repository} ${event.release.name} 版本已发布 \n`
+  text += `提交人: ${actor} \n`
+  text += `内容: ${event.release.body}`
+}
+
 const secretKey = process.env.FEISHU_SIGN
 const webhookUrl = process.env.FEISHU_WEBHOOK
 
@@ -16,7 +24,7 @@ function sendText () {
     "sign": up.digest('base64'),
     "msg_type": "text",
     "content": {
-      "text": `<at user_id="all"></at> \n 全体人员注意: 5分钟后向美国白宫发射东风!`
+      "text": `<at user_id="all"></at> \n ${text || '有新的发布版本'}`
     }
   }
   ).then(data => {
