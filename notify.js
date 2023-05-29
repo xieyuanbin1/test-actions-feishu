@@ -21,38 +21,93 @@ if (JSON.parse(process.env.GITHUB).event_name !== 'release') {
 const { repository, actor, event } = JSON.parse(process.env.GITHUB)
 
 // 卡片消息结构
-const content = {
-  "post": {
-    "zh_cn": {
-      "title": '',
-      "content": [
-        [
-          { "tag": "at", "user_id": "all" },
-        ],
-        [
-          { "tag": "text", "text": `${repository} ${event.release.name} 版本已发布。`, "style": "" }
-        ],
-        [
-          { "tag": "text", "text": '提交人：' },
-          { "tag": "text", "text": actor }
-        ],
-        [
-          { "tag": "text", "text": '版本描述信息：\n' },
-          { "tag": "text", "text": event.release.body }
-        ],
-        [
-          { "tag": "a", "href": event.release.html_url, "text": "查看详细信息" }
-        ]
+const card = {
+  "config": {
+    "wide_screen_mode": true
+  },
+  "elements": [
+    {
+      "tag": "markdown",
+      "content": "<at id=all></at>"
+    },
+    {
+      "tag": "hr"
+    },
+    {
+      "tag": "div",
+      "fields": [
+        {
+          "is_short": true,
+          "text": {
+            "tag": "lark_md",
+            "content": `**版本：**\n${event.release.name}`
+          }
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "fields": [
+        {
+          "is_short": true,
+          "text": {
+            "tag": "lark_md",
+            "content": `**提交人：**\n${actor}`
+          }
+        },
+        {
+          "is_short": true,
+          "text": {
+            "tag": "lark_md",
+            "content": `**提交时间：**\n${event.release.published_at}`
+          }
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "fields": [
+        {
+          "is_short": true,
+          "text": {
+            "tag": "lark_md",
+            "content": `**描述信息：**\n${event.release.body}`
+          }
+        }
+      ]
+    },
+    {
+      "tag": "hr"
+    },
+    {
+      "tag": "action",
+      "actions": [
+        {
+          "tag": "button",
+          "text": {
+            "tag": "plain_text",
+            "content": "查看详情"
+          },
+          "type": "primary",
+          "url": event.release.html_url
+        }
       ]
     }
-  },
+  ],
+  "header": {
+    "template": "blue",
+    "title": {
+      "content": `${repository} 新版本发布`,
+      "tag": "plain_text"
+    }
+  }
 }
 
 axios.post(webhookUrl, {
   "timestamp": timestamp,
   "sign": up.digest('base64'),
-  "msg_type": "post",
-  "content": JSON.stringify(content)
+  "msg_type": "interactive",
+  "card": card
 }).then((data) => {
   console.info('>> send ok <<', data.data)
 }).catch(err => {
