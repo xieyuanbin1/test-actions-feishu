@@ -1,8 +1,8 @@
 name: 'GitHub Actions Send Message to Feishu'
 
 on:
-  push:
-    branches: [master]
+  # push:
+  #   branches: [master]
   release:
     types: [published]
 
@@ -13,7 +13,7 @@ jobs:
       - name: "CURL Send Message"
         run: |
           curl -X POST -H "Content-Type: application/json" \
-          -d '{"msg_type":"text","content":{"text":"request example"}}' \
+          -d '{"msg_type":"text","content":{"text": ${{github.event.release.body}} }}' \
           https://open.feishu.cn/open-apis/bot/v2/hook/1a548263-1c93-47b2-887a-fe699e8b5076
 
 
