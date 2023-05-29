@@ -10,6 +10,12 @@ jobs:
   send-message-to-feishu:
     runs-on: ubuntu-latest
     steps:
+      - name: "CURL Send Message"
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"msg_type":"text","content":{"text": ${{github.event.release.body}} }}' \
+          https://open.feishu.cn/open-apis/bot/v2/hook/1a548263-1c93-47b2-887a-fe699e8b5076
+
       - name: "Log"
         env:
           CON: ${{ toJSON(github) }}
