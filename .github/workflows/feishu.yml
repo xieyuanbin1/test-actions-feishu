@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Log"
-        run: echo ${{ github.actor }}
+        env:
+          CON: ${{ toJSON(github) }}
+        run: echo "$CON"
 
       - uses: actions/checkout@v3
 
