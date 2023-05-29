@@ -1,8 +1,8 @@
 name: 'GitHub Actions Send Message to Feishu'
 
 on:
-  push:
-    branches: [master]
+  # push:
+  #   branches: [master]
   release:
     types: [published]
 
