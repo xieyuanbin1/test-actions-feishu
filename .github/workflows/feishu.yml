@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  bot:
+  send-message-to-feishu:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
