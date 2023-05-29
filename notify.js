@@ -103,7 +103,8 @@ if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release
     // 用于定义卡片正文内容 i18n_elements 用于国际化
     elements: [
       {
-        "tag": "at"
+        "tag": "at",
+        content: "all"
       },
       {
         "tag": "markdown",
@@ -118,7 +119,7 @@ if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release
     "msg_type": "interactive",
     "card": card
   }).then((data) => {
-    console.info('>> send ok <<', data)
+    console.info('>> send ok <<', data.data)
   }).catch(err => {
     console.error(">> error:", err);
   })
