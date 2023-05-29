@@ -89,7 +89,9 @@ if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release
     config: {
       enable_forward: false, // 是否允许卡片被转发 默认 true
       update_multi: true, // 是否为共享卡片 是/更新卡片的内容对所有收到这张卡片的人员可见 否/仅操作用户可见卡片的更新内容
-      wide_screen_mode: true
+    },
+    "card_link": {
+      "url": event.release.html_url
     },
     // 用于配置卡片标题内容
     header: {
@@ -103,11 +105,8 @@ if (process.env.GITHUB && JSON.parse(process.env.GITHUB).event_name === 'release
     // 用于定义卡片正文内容 i18n_elements 用于国际化
     elements: [
       {
-        "tag": "div",
-        "text": {
-          "tag": "plain_text",
-          "content": "<at id=all></at>"
-        }
+        "tag": "markdown",
+        "content": "<at id=all></at>"
       },
       {
         "tag": "markdown",
