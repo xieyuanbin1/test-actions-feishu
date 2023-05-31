@@ -1,0 +1,14 @@
+name: 'GitHub Actions Send Message to Telegram'
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  send-message-to-feishu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: 'Send Message'
+        run: curl -X POST "https://api.telegram.org/bot${{secrets.BOT_ID}}/sendMessage" -d "chat_id=%{{secrets.CHAT_ID}}&text=${{github.event.commits[0].message}}"
