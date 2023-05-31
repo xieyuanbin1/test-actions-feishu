@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  send-message-to-feishu:
+  send-message-to-telegram:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
