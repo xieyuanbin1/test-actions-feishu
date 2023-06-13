@@ -40,7 +40,7 @@ const card = {
           "is_short": true,
           "text": {
             "tag": "lark_md",
-            "content": `**版本：**\n${event.release.name}`
+            "content": `**版本：**\n${event.release.tag_name}`
           }
         }
       ]

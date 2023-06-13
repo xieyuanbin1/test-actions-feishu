@@ -1,6 +1,6 @@
 {
   "name": "test-actions-feishu",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "github actions feishu",
   "main": "main.js",
   "scripts": {
