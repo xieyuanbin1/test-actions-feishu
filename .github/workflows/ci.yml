@@ -1,14 +1,18 @@
-name: 'GitHub Actions Send Message to Telegram'
+name: 'GitHub Actions NPM Package'
 
 on:
   push:
     branches: [master]
 
 jobs:
-  send-message-to-telegram:
+  publish-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: 'Send Message'
-        run: curl -X POST "https://api.telegram.org/bot${{secrets.BOT_ID}}/sendMessage" -d "chat_id=${{secrets.CHAT_ID}}&text=${{github.event.commits[0].message}}"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
