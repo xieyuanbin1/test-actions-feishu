@@ -8,10 +8,10 @@ jobs:
   publish-npm:
     runs-on: [self-hosted, linux, ARM64]
     steps:
-      - name: 'check out'
+      - name: 'Log'
         run: echo "aaaaaa"
 
-      - name: 'send message'
+      - name: 'Checkout'
         uses: actions/checkout@v3
       # - uses: actions/setup-node@v3
       #   with:
@@ -19,7 +19,9 @@ jobs:
       #     registry-url: 'https://registry.npmjs.org'
       - name: Install
         run: npm ci
-      - name: run code
+      - name: Run Code
         run: node .github/workflows/notify.js
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          GITHUB: ${{ toJSON(github) }}
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_SIGN: ${{ secrets.FEISHU_SIGN }}
