@@ -11,12 +11,13 @@ jobs:
       - name: 'check out'
         run: echo "aaaaaa"
 
-      - uses: actions/checkout@v3
+      - name: 'send message'
+        uses: actions/checkout@v3
       # - uses: actions/setup-node@v3
       #   with:
       #     node-version: 16.x
       #     registry-url: 'https://registry.npmjs.org'
-      - run: npm ci
-      - run: node .github/workflows/notify.js
+        run: npm ci
+        run: node .github/workflows/notify.js
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
