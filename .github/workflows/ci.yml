@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Log'
-        run: echo "aaaaaa"
+        env:
+          CC: ${{ toJSON(github) }}
+        run: echo "$CC"
 
       - name: 'Checkout'
         uses: actions/checkout@v3
