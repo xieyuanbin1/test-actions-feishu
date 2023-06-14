@@ -18,7 +18,7 @@ if (JSON.parse(process.env.GITHUB).event_name !== 'release') {
   console.warn('此消息通知仅支持 release 事件。')
 }
 
-const { repository, actor, event } = JSON.parse(process.env.GITHUB)
+const { repository, actor, event, ref_name } = JSON.parse(process.env.GITHUB)
 
 // 卡片消息结构
 const card = {
@@ -40,7 +40,7 @@ const card = {
           "is_short": true,
           "text": {
             "tag": "lark_md",
-            "content": `**版本：**\n${event.release.tag_name}`
+            "content": `**分支：**\n${ref_name}`
           }
         }
       ]
@@ -59,7 +59,7 @@ const card = {
           "is_short": true,
           "text": {
             "tag": "lark_md",
-            "content": `**提交时间：**\n${event.release.published_at}`
+            "content": `**提交时间：**\n${event.commits[0].timestamp}`
           }
         }
       ]
@@ -71,7 +71,7 @@ const card = {
           "is_short": true,
           "text": {
             "tag": "lark_md",
-            "content": `**描述信息：**\n${event.release.body}`
+            "content": `**描述信息：**\n${event.commits[0].message}`
           }
         }
       ]
@@ -89,7 +89,7 @@ const card = {
             "content": "查看详情"
           },
           "type": "primary",
-          "url": event.release.html_url
+          "url": event.commits[0].url
         }
       ]
     }
