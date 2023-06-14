@@ -15,7 +15,7 @@ if (!process.env.GITHUB) {
 }
 
 if (JSON.parse(process.env.GITHUB).event_name !== 'release') {
-  return console.warn('此消息通知仅支持 release 事件。')
+  console.warn('此消息通知仅支持 release 事件。')
 }
 
 const { repository, actor, event } = JSON.parse(process.env.GITHUB)
