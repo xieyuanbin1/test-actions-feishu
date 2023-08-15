@@ -12,7 +12,9 @@ jobs:
       - uses: actions/setup-node@v3
       - run: pwd
       - run: npm ci
-      - run: echo "email=xieyuanbin@acoinfo.com" > ~/npmrc
+      - run: echo "email=xieyuanbin@acoinfo.com" > ~/.npmrc
+      - run: ls -al ~
+      - run: cat ~/.npmrc
       - run: npm config list
       - run: cat ~/.npm
 
