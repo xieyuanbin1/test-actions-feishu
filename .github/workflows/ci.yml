@@ -5,7 +5,15 @@ on:
     branches: [master]
 
 jobs:
+  init-epm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: cat ~/.npmrc
+
   publish-npm:
+    needs: init-epm
     runs-on: ubuntu-latest
     steps:
       - name: 'Log'
