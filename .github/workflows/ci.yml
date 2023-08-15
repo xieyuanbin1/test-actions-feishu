@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
       - run: pwd
       - run: ls -al ~
-      - run: cat ~/.npmrc
+      - run: cat ~/.npm
 
   publish-npm:
     needs: init-epm
