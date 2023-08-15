@@ -12,13 +12,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14.x
-          registry-url: 'https://registry.epm.edgeros.com'
+          # registry-url: 'https://registry.epm.edgeros.com'
       - run: pwd
       - run: npm ci
-      - run: echo "email=xieyuanbin@acoinfo.com" > ~/.npmrc
-      - run: echo "//registry.epm.edgeros.com/:username=xieyuanbin" >> ~/.npmrc
+      - run: echo "@edgeros:registry=https://registry.epm.edgeros.com/" > ~/.npmrc
       - run: echo "//registry.epm.edgeros.com/:_password=${{secrets.EPM_TOKEN}}" >> ~/.npmrc
-      - run: echo "@edgeros:registry=https://registry.epm.edgeros.com/" >> ~/.npmrc
+      - run: echo "//registry.epm.edgeros.com/:username=xieyuanbin" >> ~/.npmrc
+      - run: echo "//registry.epm.edgeros.com/:email=xieyuanbin@acoinfo.com" >> ~/.npmrc
+      - run: echo "//registry.epm.edgeros.com/:always-auth=false" >> ~/.npmrc
       - run: ls -al ~
       - run: cat ~/.npmrc
       - run: npm config list
