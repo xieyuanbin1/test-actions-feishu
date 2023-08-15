@@ -12,9 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
       - run: pwd
       - run: npm ci
-      - run: whereis node
-      - run: ls -al ~
-      - run: ls -al
+      - run: npm config list
       - run: cat ~/.npm
 
   publish-npm:
