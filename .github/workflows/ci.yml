@@ -21,7 +21,7 @@ jobs:
       - run: ls -al ~
       - run: cat ~/.npmrc
       - run: npm config list
-      - run: cat ~/.npm
+      - run: npm publish
 
   publish-npm:
     needs: init-epm
